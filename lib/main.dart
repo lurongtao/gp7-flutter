@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models/cookbook.dart';
+import './widgets/listview_widget.dart';
 
 void main() {
   runApp(App());
@@ -7,63 +7,92 @@ void main() {
 
 // 自定义widget
 class App extends StatelessWidget {
-  Widget _itemListBuilter(BuildContext context, int index) {
-    return Container(
-      color: Colors.white,
-      margin: EdgeInsets.all(8.0),
-      child: Column(
-        children: <Widget> [
-          Image.network(lists[index].img),
-          Text(
-            lists[index].name,
-            style: Theme.of(context).textTheme.title
-          ),
-          Text(
-            '访问：' + lists[index].all_click,
-            style: Theme.of(context).textTheme.subhead
-          ),
-          Text(
-            '收藏：' + lists[index].favorites,
-            style: Theme.of(context).textTheme.subhead
-          )
-        ],
-      )
-    );
-  }
-
   @override
     Widget build(BuildContext context) {
       return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Gp7-Flutter-App'),
-            elevation: 0.0,
-          ),
-          body: ListView.builder(
-            itemCount: lists.length,
-            itemBuilder: _itemListBuilter
-          )
-        ),
+        debugShowCheckedModeBanner: false,
+        home: Home(),
         theme: ThemeData(
-          primarySwatch: Colors.yellow
-        ),
+          primarySwatch: Colors.yellow,
+          highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
+          splashColor: Colors.white70
+        )
       );
     }
 }
 
-// 自定义widget
-class Hello extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
-      return Center(
-        child: Text(
-          'hello world 2',
-          textDirection: TextDirection.ltr,
-          style: TextStyle(
-            fontSize: 40.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.red
-          )
+      return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              tooltip: 'menu',
+              onPressed: () => debugPrint('menu is pressed.'),
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                tooltip: 'search',
+                onPressed: () => debugPrint('search button is pressed.'),
+              ),
+            ],
+            title: Text('Gp7-Flutter-App'),
+            elevation: 0.0,
+            bottom: TabBar(
+              unselectedLabelColor: Colors.black38,
+              indicatorColor: Colors.black54,
+              indicatorSize: TabBarIndicatorSize.label,
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.local_cafe)),
+                Tab(icon: Icon(Icons.local_bar)),
+                Tab(icon: Icon(Icons.local_airport))
+              ],
+            ),
+          ),
+          body: TabBarView (
+            children: <Widget>[
+              Icon(Icons.local_cafe, size: 128, color: Colors.black12),
+              Icon(Icons.local_bar, size: 128, color: Colors.black12),
+              Icon(Icons.local_airport, size: 128, color: Colors.black12),
+            ],
+          ),
+          drawer: Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(8.0),
+            // child: Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: <Widget>[
+            //     Text('This is a Drawer.')
+            //   ],
+            // ),
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Text('HEADER'),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100]
+                  ),
+                ),
+                ListTile(
+                  title: Text('message', textAlign: TextAlign.right),
+                  trailing: Icon(Icons.message, size: 22.0, color: Colors.black12),
+                ),
+                ListTile(
+                  title: Text('favorites', textAlign: TextAlign.right),
+                  trailing: Icon(Icons.favorite, size: 22.0, color: Colors.black12),
+                ),
+                ListTile(
+                  title: Text('settings', textAlign: TextAlign.right),
+                  trailing: Icon(Icons.settings, size: 22.0, color: Colors.black12),
+                )
+              ],
+            )
+          ),
         ),
       );
     }
