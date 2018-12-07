@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './widgets/listview_widget.dart';
 import './widgets/drawer_widget.dart';
 import './widgets/bottom_navigation_bar_widget.dart';
+import './widgets/basic_widget.dart';
 
 void main() {
   runApp(App());
@@ -30,11 +31,6 @@ class Home extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            // leading: IconButton(
-            //   icon: Icon(Icons.menu),
-            //   tooltip: 'menu',
-            //   onPressed: () => debugPrint('menu is pressed.'),
-            // ),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.search),
@@ -58,7 +54,7 @@ class Home extends StatelessWidget {
           body: TabBarView (
             children: <Widget>[
               ListViewWidget(),
-              Icon(Icons.local_bar, size: 128, color: Colors.black12),
+              BasicWidget(),
               Icon(Icons.local_airport, size: 128, color: Colors.black12),
             ],
           ),
