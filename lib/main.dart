@@ -3,6 +3,8 @@ import './widgets/listview_widget.dart';
 import './widgets/drawer_widget.dart';
 import './widgets/bottom_navigation_bar_widget.dart';
 import './widgets/basic_widget.dart';
+import './widgets/layout_widget.dart';
+import './widgets/view_widget.dart';
 
 void main() {
   runApp(App());
@@ -55,7 +57,7 @@ class Home extends StatelessWidget {
             children: <Widget>[
               ListViewWidget(),
               BasicWidget(),
-              Icon(Icons.local_airport, size: 128, color: Colors.black12),
+              ViewWidget()
             ],
           ),
           drawer: DrawerWidget(),
